@@ -1,3 +1,4 @@
+//Se carga todo el parqués
 public int pantalla;
 public inicio I;
 
