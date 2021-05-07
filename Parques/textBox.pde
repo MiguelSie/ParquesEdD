@@ -45,10 +45,9 @@ class textBox{
       }
       
       rect(x, y, w, h, 10);
-      
       fill(foreground);
       textSize(txtSize);
-      text(text, x + (textWidth("a") / 2), Y + txtSize);
+      text(text, x + (textWidth("a") / 2), y);
    }
    
    public String getText(){
@@ -72,7 +71,7 @@ class textBox{
    }
    //Añade texto a la cadena
    private void addText(char text) {
-      if (this.text.length() < 20) {
+      if (this.text.length() < 14) {
          this.text += text;
          textLength++;
       }
