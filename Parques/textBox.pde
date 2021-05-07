@@ -1,98 +1,94 @@
 class textBox{
-   public int X = 0, Y = 0, H = 35, W = 200;
-   public int TEXTSIZE = 24;
+   public int x, y, h, w;
+   public int txtSize = 24;
+   public color background = color(140, 140, 140);
+   public color foreground = color(0, 0, 0);
+   public color backgroundSelected = color(160, 160, 160);
+   public color border = color(30, 30, 30);
    
-   // colores
-   public color Background = color(140, 140, 140);
-   public color Foreground = color(0, 0, 0);
-   public color BackgroundSelected = color(160, 160, 160);
-   public color Border = color(30, 30, 30);
+   public boolean borderEnable = false;
+   public int borderWeight = 1;
    
-   public boolean BorderEnable = false;
-   public int BorderWeight = 1;
-   
-   public String Text = "";
-   public int TextLength = 0;
+   public String text = "";
+   public int textLength = 0;
 
    private boolean selected = false;
    
    textBox() {
-      // CREATE OBJECT DEFAULT TEXTBOX
+      // txtBox por defecto
+      x = width/2;
+      y = height/2;
+      w = 100;
+      h = 50;
    }
    
    textBox(int x, int y, int w, int h) {
-      X = x; Y = y; W = w; H = h;
+      this.x = x; 
+      this.y = y; 
+      this.w = w; 
+      this.h = h;
    }
    
-   void DRAW() {
-      // DRAWING THE BACKGROUND
+   void mostrar() {
+      // dibuja el txtBox
       if (selected) {
-         fill(BackgroundSelected);
+         fill(backgroundSelected);
       } else {
-         fill(Background);
+         fill(background);
       }
       
-      if (BorderEnable) {
-         strokeWeight(BorderWeight);
-         stroke(Border);
+      if (borderEnable) {
+         strokeWeight(borderWeight);
+         stroke(border);
       } else {
          noStroke();
       }
       
-      rect(X, Y, W, H);
+      rect(x, y, w, h, 10);
       
-      // DRAWING THE TEXT ITSELF
-      fill(Foreground);
-      textSize(TEXTSIZE);
-      text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
+      fill(foreground);
+      textSize(txtSize);
+      text(text, x + (textWidth("a") / 2), Y + txtSize);
    }
    
-   // IF THE KEYCODE IS ENTER RETURN 1
-   // ELSE RETURN 0
-   boolean KEYPRESSED(char KEY, int KEYCODE) {
+   public String getText(){
+     return text;
+   }
+   
+   //Verifica la tecla presionada y realiza una acción acorde a la misma
+   public void keyPresseD(char Key, int KeyCode) {
       if (selected) {
-         if (KEYCODE == (int)BACKSPACE) {
-            BACKSPACE();
-         } else if (KEYCODE == 32) {
-            // SPACE
-            addText(' ');
-         } else if (KEYCODE == (int)ENTER) {
-            return true;
+         if (KeyCode == (int)BACKSPACE) {
+            backspace();
          } else {
-            // CHECK IF THE KEY IS A LETTER OR A NUMBER
-            boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
-            boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
-            boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
-      
+            boolean isKeyCapitalLetter = (Key >= 'A' && Key <= 'Z');
+            boolean isKeySmallLetter = (Key >= 'a' && Key <= 'z');
+            boolean isKeyNumber = (Key >= '0' && Key <= '9');
             if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
-               addText(KEY);
+               addText(Key);
             }
          }
       }
-      
-      return false;
    }
-   
+   //Añade texto a la cadena
    private void addText(char text) {
-      // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
-      if (textWidth(Text + text) < W) {
-         Text += text;
-         TextLength++;
+      if (this.text.length() < 20) {
+         this.text += text;
+         textLength++;
       }
    }
    
-   private void BACKSPACE() {
-      if (TextLength - 1 >= 0) {
-         Text = Text.substring(0, TextLength - 1);
-         TextLength--;
+   private void backspace() {
+      if (textLength - 1 >= 0) {
+         text = text.substring(0, textLength - 1);
+         textLength--;
       }
    }
    
-   // FUNCTION FOR TESTING IS THE POINT
-   // OVER THE TEXTBOX
+   //Revisa si el mouse está sobre el txtBox
    private boolean overBox(int x, int y) {
-      if (x >= X && x <= X + W) {
-         if (y >= Y && y <= Y + H) {
+      if (x >= this.x && x <= this.x + w) {
+         if (y >= this.y && y <= this.y + h) {
             return true;
          }
       }
@@ -100,7 +96,8 @@ class textBox{
       return false;
    }
    
-   void PRESSED(int x, int y) {
+   //Verifica si, estando el cursor sobre el txtBox, este fue oprimido
+   public void pressed(int x, int y) {
       if (overBox(x, y)) {
          selected = true;
       } else {

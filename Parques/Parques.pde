@@ -15,3 +15,17 @@ public void draw(){
   }
   
 }
+
+//Revisa qué ocurre si el mouse fue presionado según qué pantalla esté
+void mousePressed(){
+  if(pantalla==0){
+    I.pressed();
+  }
+}
+
+//Revisa qué hacer según en qué pantalla fue presionada una tecla
+void keyPressed(){
+  if(pantalla==0){
+    I.kpressed();
+  }
+}
