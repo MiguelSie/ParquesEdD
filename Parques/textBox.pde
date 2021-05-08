@@ -1,12 +1,12 @@
 class textBox{
    public int x, y, h, w;
    public int txtSize = 24;
-   public color background = color(140, 140, 140);
+   public color background = color(120, 120, 120);
    public color foreground = color(0, 0, 0);
-   public color backgroundSelected = color(160, 160, 160);
+   public color backgroundSelected = color(170, 170, 170);
    public color border = color(30, 30, 30);
    
-   public boolean borderEnable = false;
+   public boolean borderEnable = true;
    public int borderWeight = 1;
    
    public String text = "";
@@ -43,6 +43,10 @@ class textBox{
       } else {
          noStroke();
       }
+      
+      stroke(overBox(mouseX, mouseY)? color(0) : color(225));
+      strokeWeight(8);
+      rect(x,y,w,h, 10);
       
       rect(x, y, w, h, 10);
       fill(foreground);

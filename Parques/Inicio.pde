@@ -18,6 +18,16 @@ class inicio {
   stroke(1);
   text("PARQUÉS", width/2, height/6); 
   b.display();
+  fill(0);
+  text("Ficha", 320, 195);
+  text("Ficha", 320, 265);
+  text("Ficha", 320, 335);
+  fill(0, 0, 100);
+  text("Azul", 400, 195);
+  fill (0,100,0);
+  text ("Verde", 410, 265);
+  fill (100,0,0);
+  text ("Rojo", 400, 335);
   for (textBox t: txtBoxes){
     t.mostrar();
   }

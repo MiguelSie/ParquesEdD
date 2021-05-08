@@ -16,8 +16,8 @@ class boton{
   //Dibuja el boton
   public void display(){
     rectMode(CENTER);
-    fill(0);
-    stroke(isInside()? color(0,255,0) : color(225));
+    fill(100);
+    stroke(isInside()? color(0) : color(225));
     strokeWeight(8);
     rect(x,y,w,h, 10);
     
