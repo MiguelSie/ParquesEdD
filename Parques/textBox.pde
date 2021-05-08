@@ -44,7 +44,7 @@ class textBox{
          noStroke();
       }
       
-      stroke(overBox(mouseX, mouseY)? color(0) : color(225));
+      stroke(isInside()? color(0) : color(225));
       strokeWeight(8);
       rect(x,y,w,h, 10);
       
@@ -89,19 +89,13 @@ class textBox{
    }
    
    //Revisa si el mouse está sobre el txtBox
-   private boolean overBox(int x, int y) {
-      if (x >= this.x && x <= this.x + w) {
-         if (y >= this.y && y <= this.y + h) {
-            return true;
-         }
-      }
-      
-      return false;
-   }
+   public boolean isInside() {
+    return mouseX > (x-w/2) & mouseX < (x+w/2) & mouseY > (y-h/2) & mouseY < (y+h/2);
+  }
    
    //Verifica si, estando el cursor sobre el txtBox, este fue oprimido
    public void pressed(int x, int y) {
-      if (overBox(x, y)) {
+      if (isInside()) {
          selected = true;
       } else {
          selected = false;
