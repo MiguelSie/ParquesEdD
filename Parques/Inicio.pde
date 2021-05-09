@@ -15,8 +15,6 @@ class inicio {
   textAlign(CENTER);
   fill(200);
   textSize(48);
-  strokeWeight(10);
-  stroke(10);
   text("PARQUÉS", width/2, height/6); 
   b.display();
   fill(0);
