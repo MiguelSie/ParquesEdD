@@ -27,7 +27,7 @@ public void mostrar(){
   translate(510,260);
   rotate(radians(60));
   dibujarCasillas();
-  translate(0, 0);
+  translate(-25, -50);
   rotate(radians(60));
   dibujarCasillas();
   
