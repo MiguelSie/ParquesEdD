@@ -1,13 +1,14 @@
 class inicio {
-  public ArrayList<textBox> txtBoxes;
+  textBox txtBoxAzul;
+  textBox txtBoxVerde;
+  textBox txtBoxRojo;
   boton b;
   
   public inicio(){
-    txtBoxes= new ArrayList();
     b = new boton("LISTO", 30, width/2, 500, 400, 50);
-    txtBoxes.add(new textBox(width/2, 200, 200, 50));
-    txtBoxes.add(new textBox(width/2, 270, 200, 50));
-    txtBoxes.add(new textBox(width/2, 340, 200, 50));
+    txtBoxAzul = new textBox(width/2, 200, 200, 50);
+    txtBoxVerde = new textBox(width/2, 270, 200, 50);
+    txtBoxRojo = new textBox(width/2, 340, 200, 50);
   }
   
   public void mostrar(){
@@ -27,9 +28,9 @@ class inicio {
   text ("Verde", 410, 265);
   fill (100,0,0);
   text ("Rojo", 400, 335);
-  for (textBox t: txtBoxes){
-    t.mostrar();
-  }
+  txtBoxAzul.mostrar();
+  txtBoxVerde.mostrar();
+  txtBoxRojo.mostrar();
   acciones();
   }
   
@@ -37,21 +38,26 @@ class inicio {
     if (mousePressed){
       if (b.isInside()){
         pantalla=1;
+        j.FA.setNombre(txtBoxAzul.getText());
+        j.FV.setNombre(txtBoxVerde.getText());
+        j.FR.setNombre(txtBoxRojo.getText());
         }
     }
   }
   
   //Se verifica donde se presionó el botón (si está encima del textBox se selecciona y se permite escribir)
   public void pressed(){
-    for (textBox t: txtBoxes){
-    t.pressed(mouseX, mouseY);
-    }
+    txtBoxAzul.pressed(mouseX, mouseY);
+    txtBoxVerde.pressed(mouseX, mouseY);
+    txtBoxRojo.pressed(mouseX, mouseY);
+    
   }
   //Se verifica qué teclas fueron oprimidas para representarlas en pantalla
   public void kpressed(){
-    for (textBox t: txtBoxes){
-    t.keyPresseD(key, keyCode);
-    }
+    txtBoxAzul.keyPresseD(key, keyCode);
+    txtBoxVerde.keyPresseD(key, keyCode);
+    txtBoxRojo.keyPresseD(key, keyCode);
+    
   }
 
 

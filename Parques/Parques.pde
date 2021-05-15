@@ -1,13 +1,13 @@
 //Se carga todo el parqués
 public int pantalla;
 private inicio I;
-private Tablero Tab;
+private Juego j;
 
 public void setup(){
   size (1200, 600);
   pantalla=0;
   I = new inicio();
-  Tab = new Tablero();
+  j = new Juego();
 }
 
 public void draw(){
@@ -16,7 +16,7 @@ public void draw(){
     I.mostrar();
     break;
   case 1:
-    Tab.mostrar();
+    j.mostrar();
     break;
   }
   
