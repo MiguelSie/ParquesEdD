@@ -3,16 +3,23 @@ private int filas;
 private int columnas;
 private int CasillasX;
 private int CasillasY;
+private int cont;
+Dado d;
 
 public Tablero(){
 this.filas = 15;
 this.columnas = 1;
 this.CasillasX = 60;
 this.CasillasY = 35;
+this.cont = 0;
+d = new Dado();
 }
 
 public void mostrar(){
   background(255);
+  
+  d.mostrar();
+  
   pushMatrix();
   translate(width*0.5, height*0.5);
   fill(255);
@@ -21,16 +28,22 @@ public void mostrar(){
   noFill();
   popMatrix();
   
+  pushMatrix();
   translate(833, 40);
   rotate(radians(90));
-  dibujarCasillas();
+  dibujarCasillas(1);
   translate(510,260);
   rotate(radians(60));
-  dibujarCasillas();
+  dibujarCasillas(2);
   translate(-25, -50);
   rotate(radians(60));
-  dibujarCasillas();
+  dibujarCasillas(3);
+  popMatrix();
   
+  line(310, 95, 560, 250);
+  line(835, 95, 560, 250);
+  line(570, 540, 560, 250);
+  //acciones();
 }
 
 void poligono(float x, float y, float radius, int npoints) {
@@ -45,20 +58,64 @@ void poligono(float x, float y, float radius, int npoints) {
 }
   
   
-void dibujarCasillas(){
-  for(int r=0; r<filas; r++){
-      for(int c=0; c<columnas; c++){
+void dibujarCasillas(int n){
+  cont = n;
+  for(int c=0; c<columnas; c++){
+      for(int r=0; r<filas; r++){
         float sx = c*CasillasX;
         float sy = r*CasillasY;
-        stroke(0);
-        strokeWeight(5);
-        fill(255);
-        rectMode(CORNER);
-        rect(sx, sy, CasillasX, CasillasY);
-        strokeWeight(8);
-      }
+        if(r == 7 && cont == 1){
+           color cl = color(200, 0, 0);
+           stroke(0);
+           strokeWeight(5);
+           rectMode(CORNER);
+           fill(cl);
+           rect(sx, sy, CasillasX, CasillasY);
+           fill(0);
+           text("E/S", sx+30, sy+15);
+           strokeWeight(8);
+        } else {
+          if(r == 7 && cont == 2){
+             color cl = color(0, 200, 0);stroke(0);
+             strokeWeight(5);
+             rectMode(CORNER);
+             fill(cl);
+             rect(sx, sy, CasillasX, CasillasY);
+             fill(0);
+             text("E/S", sx+30, sy+15);
+             strokeWeight(8);
+          } else{
+            if(r == 7 && cont == 3){
+               color cl = color(0, 0, 200);
+               stroke(0);
+               strokeWeight(5);
+               rectMode(CORNER);
+               fill(cl);
+               rect(sx, sy, CasillasX, CasillasY);
+               fill(0);
+               text("E/S", sx+30, sy+15);
+               strokeWeight(8);
+            } else {
+               color cl = color(255);
+               stroke(0);
+               strokeWeight(5);
+               rectMode(CORNER);
+               fill(cl);
+               rect(sx, sy, CasillasX, CasillasY);
+               strokeWeight(8);
+              }
+            }
+          }
+       }
   }
 }
 
+/*public void acciones(){
+    if (mousePressed){
+      if (d.isInside()){
+        println(d.getResultado());
+        }
+    }
+  }*/
   
 }

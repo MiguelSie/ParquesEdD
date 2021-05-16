@@ -18,6 +18,7 @@ class Ficha {
   public void mostrar (){
     fill(Color);
     circle (x,y,30);
+    noFill();
   }
   
   //Función para que se mueva directo a la carcel, llamada desde el método de cárcel, el cual se llama al cumplirse la condición
