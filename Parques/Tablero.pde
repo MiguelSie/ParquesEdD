@@ -4,6 +4,7 @@ private int columnas;
 private int CasillasX;
 private int CasillasY;
 private int cont;
+private int n = 1;
 Dado d;
 
 public Tablero(){
@@ -18,7 +19,7 @@ d = new Dado();
 public void mostrar(){
   background(255);
   
-  d.mostrar();
+  d.mostrar(n);
   
   pushMatrix();
   translate(width*0.5, height*0.5);
@@ -39,11 +40,18 @@ public void mostrar(){
   rotate(radians(60));
   dibujarCasillas(3);
   popMatrix();
-  
+
+  strokeWeight(5);
   line(310, 95, 560, 250);
   line(835, 95, 560, 250);
   line(570, 540, 560, 250);
-  //acciones();
+
+  line(310, 40, 260, 120);
+  line(830, 40, 882, 123);
+  line(520, 580, 615, 580);
+  strokeWeight(8);
+  
+  acciones();
 }
 
 void poligono(float x, float y, float radius, int npoints) {
@@ -110,12 +118,12 @@ void dibujarCasillas(int n){
   }
 }
 
-/*public void acciones(){
-    if (mousePressed){
+public void acciones(){
+    if(mousePressed){
       if (d.isInside()){
-        println(d.getResultado());
-        }
+       n = d.getResultado();
+      }  
     }
-  }*/
-  
+}
+
 }

@@ -29,10 +29,6 @@ void mousePressed(){
   }
 }
 
-void mouseClicked(){
-  
-}
-
 //Revisa qué hacer según en qué pantalla fue presionada una tecla
 void keyPressed(){
   if(pantalla==0){
