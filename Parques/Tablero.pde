@@ -5,7 +5,10 @@ private int CasillasX;
 private int CasillasY;
 private int cont;
 private int n = 1;
+private int fichaJugar = 1; //Si la variable tiene un valor de 1, juega azul, 2 verde y 3 roja
 Dado d;
+Casilla ptr;
+int numCasillas = 48;
 
 public Tablero(){
 this.filas = 15;
@@ -14,6 +17,10 @@ this.CasillasX = 60;
 this.CasillasY = 35;
 this.cont = 0;
 d = new Dado();
+ptr = null;
+for (int i = 1; i<=48; i++){
+  addCasilla(ptr);
+}
 }
 
 public void mostrar(){
@@ -118,9 +125,26 @@ void dibujarCasillas(int n){
   }
 }
 
+public Casilla addCasilla (Casilla ptr){
+  Casilla p = ptr;
+  Casilla q = new Casilla();
+  if (ptr == null){
+    ptr = q;
+    q.link = ptr;
+  } else {
+    while (p.link != ptr){
+      p = p.link;
+    }
+    p.link = q;
+    q.link = ptr;
+  }
+  return ptr;
+}
+
 public void acciones(){
     if(mousePressed){
       if (d.isInside()){
+        //podemos crear una funcion mover ficha que se ejecute cuando se oprima el dado, de esa forma nos aseguramos que se juegue cuando se presione el dado
        n = d.getResultado();
       }  
     }

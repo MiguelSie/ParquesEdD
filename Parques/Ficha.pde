@@ -17,7 +17,7 @@ class Ficha {
   
   public void mostrar (){
     fill(Color);
-    circle (x,y,30);
+    circle (x,y,20);
     noFill();
   }
   
