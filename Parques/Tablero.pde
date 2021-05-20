@@ -1,13 +1,19 @@
 class Tablero {
+private Juego j;
 private int filas;
 private int columnas;
 private int CasillasX;
 private int CasillasY;
 private int cont;
 private int n = 1;
+private int sw = 0;
+private int c = 0;
 private int fichaJugar = 1; //Si la variable tiene un valor de 1, juega azul, 2 verde y 3 roja
 Dado d;
 Casilla ptr;
+Casilla casillaRoja;
+Casilla casillaAzul;
+Casilla casillaVerde;
 int numCasillas = 48;
 
 public Tablero(){
@@ -19,8 +25,11 @@ this.cont = 0;
 d = new Dado();
 ptr = null;
 for (int i = 1; i<=48; i++){
-  addCasilla(ptr);
+  ptr = addCasilla(ptr);
 }
+casillaRoja = ptr;
+casillaAzul = ptr;
+casillaVerde = ptr;
 }
 
 public void mostrar(){
@@ -59,6 +68,7 @@ public void mostrar(){
   strokeWeight(8);
   
   acciones();
+  c++;
 }
 
 void poligono(float x, float y, float radius, int npoints) {
@@ -141,13 +151,63 @@ public Casilla addCasilla (Casilla ptr){
   return ptr;
 }
 
+public void actualizarPos(int n, Casilla p, int t){
+  int c = 0;
+  switch (t){
+    case 1:
+    p.fichaAON = false;
+    while (c < n){
+      p = p.link;
+      c++;
+    }
+    p.fichaAON = true;
+    case 2:
+    p.fichaVON = false;
+    while (c < n){
+      p = p.link;
+      c++;
+    }
+    p.fichaVON = true;
+    case 3:
+    p.fichaRON = false;
+    while (c < n){
+      p = p.link;
+      c++;
+    }
+    p.fichaRON = true;
+  }
+}
+
+public void jugar(int n){
+  if (fichaJugar == 1){
+    j.FA.setXY(j.FA.getX()+10*n, j.FA.getY());
+    actualizarPos(n, casillaAzul, 1);
+    fichaJugar = 2;
+  } else if (fichaJugar == 2){
+    j.FV.setXY(j.FV.getX()+10*n, j.FV.getY());
+    fichaJugar = 3;
+  } else if (fichaJugar == 3){
+    j.FR.setXY(j.FR.getX()+10*n, j.FR.getY());
+    fichaJugar = 1;
+  }
+}
+
 public void acciones(){
     if(mousePressed){
-      if (d.isInside()){
-        //podemos crear una funcion mover ficha que se ejecute cuando se oprima el dado, de esa forma nos aseguramos que se juegue cuando se presione el dado
+      if (d.isInside() && sw==0){
        n = d.getResultado();
+       jugar(n);
+       sw = 1;
       }  
     }
+    if (c%60==0){
+    sw = 0;
+    c = 0;
+  }
+}
+
+public void setJuego(Juego j){
+  this.j = j;
 }
 
 }

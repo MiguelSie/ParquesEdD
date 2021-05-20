@@ -24,9 +24,17 @@ class Ficha {
   //Función para que se mueva directo a la carcel, llamada desde el método de cárcel, el cual se llama al cumplirse la condición
   
   //Funcion para que se mueva en x o en y en funcion del número que haya salido en el dado, esta se llamaría desde juego
-  public void mover(int n){
-    int mov = n;
+  public void setXY(int x, int y){
+    this.x = x;
+    this.y = y;
+  }
   
+  public int getX (){
+    return x;
+  }
+  
+  public int getY(){
+    return y;
   }
 
 }
