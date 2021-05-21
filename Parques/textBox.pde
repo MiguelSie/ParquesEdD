@@ -1,9 +1,9 @@
 class textBox{
    public int x, y, h, w;
    public int txtSize = 24;
-   public color background = color(120, 120, 120);
+   public color background = color(240, 240, 240);
    public color foreground = color(0, 0, 0);
-   public color backgroundSelected = color(170, 170, 170);
+   public color backgroundSelected = color(200, 200, 200);
    public color border = color(30, 30, 30);
    
    public boolean borderEnable = true;
@@ -44,7 +44,7 @@ class textBox{
          noStroke();
       }
       
-      stroke(isInside()? color(0) : color(225));
+      stroke(isInside()? color(120) : color(0));
       strokeWeight(8);
       rect(x,y,w,h, 10);
       

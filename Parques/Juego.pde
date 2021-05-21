@@ -7,9 +7,9 @@ class Juego{
   public Juego(){
     t = new Tablero();
     t.setJuego(this);
-    FR = new Ficha(#990000, 50, 50);
-    FV = new Ficha(#009924, 100, 50);
-    FA = new Ficha(#0f0099, 150, 50);
+    FR = new Ficha(#990000, 565, 160);
+    FV = new Ficha(#009924, 485, 285);
+    FA = new Ficha(#0f0099, 645, 285);
   }
   
   void mostrar(){

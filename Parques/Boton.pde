@@ -16,15 +16,15 @@ class boton{
   //Dibuja el boton
   public void display(){
     rectMode(CENTER);
-    fill(100);
-    stroke(isInside()? color(0) : color(225));
+    fill(240);
+    stroke(isInside()? color(120) : color(0));
     strokeWeight(8);
     rect(x,y,w,h, 10);
     
     //Dibuja el texto del boton
     textAlign(CENTER, CENTER);
     textSize(txtSize);
-    fill(225);
+    fill(0);
     text(txt, x, y-2);
   }
   

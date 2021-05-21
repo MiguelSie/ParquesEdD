@@ -4,16 +4,11 @@ private int filas;
 private int columnas;
 private int CasillasX;
 private int CasillasY;
-private int cont;
-private int n = 1;
-private int sw = 0;
-private int c = 0;
-private int fichaJugar = 1; //Si la variable tiene un valor de 1, juega azul, 2 verde y 3 roja
+private int fichaJugar = 2; //Si la variable tiene un valor de 1, juega azul, 2 verde y 3 roja
+private int n = 1, sw = 0, c = 0, contR = 0, contV = 0, contA = 0;
+private boolean primeraV = true, primeraA = true, primeraR = true;
 Dado d;
-Casilla ptr;
-Casilla casillaRoja;
-Casilla casillaAzul;
-Casilla casillaVerde;
+Casilla ptr, casillaRoja, casillaAzul, casillaVerde;
 int numCasillas = 48;
 
 public Tablero(){
@@ -21,7 +16,6 @@ this.filas = 15;
 this.columnas = 1;
 this.CasillasX = 60;
 this.CasillasY = 35;
-this.cont = 0;
 d = new Dado();
 ptr = null;
 for (int i = 1; i<=48; i++){
@@ -33,12 +27,36 @@ casillaVerde = ptr;
 }
 
 public void mostrar(){
-  background(255);
+  background(fondo);
   
+  fill(0);
+  text("Jugador:",80,330);
+  switch(fichaJugar){
+    case 1:
+      text("Azul",160,330);
+      break;
+    case 2:
+      text("Verde",160,330);
+      break;
+    case 3:
+      text("Rojo",160,330);
+      break;
+    default:
+      text("Indeterminado",160,330);
+  }
+  noFill();
   d.mostrar(n);
   
+  fill(255);
+  strokeWeight(5);
+  poligono(310,159,68,6);
+  poligono(830,159,68,6);
+  poligono(570,610,68,6);
+  strokeWeight(8);
+  noFill();
+  
   pushMatrix();
-  translate(width*0.5, height*0.5);
+  translate(600, 300);
   fill(255);
   rotate(74.88);
   poligono(0, 0, 300, 3);
@@ -58,13 +76,29 @@ public void mostrar(){
   popMatrix();
 
   strokeWeight(5);
-  line(310, 95, 560, 250);
-  line(835, 95, 560, 250);
-  line(570, 540, 560, 250);
-
-  line(310, 40, 260, 120);
-  line(830, 40, 882, 123);
-  line(520, 580, 615, 580);
+  line(310, 95, 565, 245);
+  line(835, 95, 565, 245);
+  line(570, 540, 565, 245);
+  
+  rectMode(CENTER);
+  fill(255,0,0);
+  rect(565,160,130,105,20);
+  
+  pushMatrix();
+  fill(0,255,0);
+  translate(490,230);
+  rotate(radians(60));
+  rect(50,30,130,100,20);
+  popMatrix();
+  
+  pushMatrix();
+  fill(0,0,255);
+  translate(640,230);
+  rotate(radians(-60));
+  rect(-50,35,130,105,20);
+  popMatrix();
+  
+  stroke(0);
   strokeWeight(8);
   
   acciones();
@@ -83,8 +117,8 @@ void poligono(float x, float y, float radius, int npoints) {
 }
   
   
-void dibujarCasillas(int n){
-  cont = n;
+void dibujarCasillas(int i){
+  int cont = i;
   for(int c=0; c<columnas; c++){
       for(int r=0; r<filas; r++){
         float sx = c*CasillasX;
@@ -156,23 +190,35 @@ public void actualizarPos(int n, Casilla p, int t){
   switch (t){
     case 1:
     p.fichaAON = false;
-    while (c < n){
+    while (c < n && contA < 48){
       p = p.link;
       c++;
+      contA++;
+    }
+    if(contA == 48){
+      j.FA.setGanador();
     }
     p.fichaAON = true;
     case 2:
     p.fichaVON = false;
-    while (c < n){
+    while (c < n && contV < 48){
       p = p.link;
       c++;
+      contV++;
+    }
+    if(contR == 48){
+      j.FV.setGanador();
     }
     p.fichaVON = true;
     case 3:
     p.fichaRON = false;
-    while (c < n){
+    while (c < n && contR < 48){
       p = p.link;
       c++;
+      contR++;
+    }
+    if(contR == 48){
+      j.FR.setGanador();
     }
     p.fichaRON = true;
   }
@@ -180,25 +226,48 @@ public void actualizarPos(int n, Casilla p, int t){
 
 public void jugar(int n){
   if (fichaJugar == 1){
-    j.FA.setXY(j.FA.getX()+10*n, j.FA.getY());
-    actualizarPos(n, casillaAzul, 1);
-    fichaJugar = 2;
-  } else if (fichaJugar == 2){
-    j.FV.setXY(j.FV.getX()+10*n, j.FV.getY());
-    fichaJugar = 3;
-  } else if (fichaJugar == 3){
-    j.FR.setXY(j.FR.getX()+10*n, j.FR.getY());
-    fichaJugar = 1;
-  }
+    if(n == 6 && primeraA == true){
+      j.FA.setXY(725,340);
+      actualizarPos(0,casillaAzul,1);
+      primeraA = false;
+      fichaJugar = 2;
+    } else {
+        j.FA.setXY(j.FA.getX()+10*n, j.FA.getY());
+        actualizarPos(n, casillaAzul, 1);
+        fichaJugar = 2;
+      }
+    } else if (fichaJugar == 2){
+        if(n == 6 && primeraV == true){
+            j.FV.setXY(420,340);
+            actualizarPos(0,casillaVerde,2);
+            primeraV = false;
+            fichaJugar = 3;
+        } else {
+            j.FV.setXY(j.FV.getX()+10*n, j.FV.getY());
+            actualizarPos(n, casillaVerde, 2);
+            fichaJugar = 3;
+          }
+    } else if (fichaJugar == 3){
+        if(n == 6 && primeraR == true){
+            j.FR.setXY(570,70);
+            actualizarPos(0,casillaRoja,3);
+            primeraR = false;
+            fichaJugar = 1;
+        } else {
+            j.FR.setXY(j.FR.getX()+10*n, j.FR.getY());
+            actualizarPos(n, casillaRoja, 3);
+            fichaJugar = 1;
+          }
+    }
 }
 
 public void acciones(){
     if(mousePressed){
-      if (d.isInside() && sw==0){
-       n = d.getResultado();
-       jugar(n);
-       sw = 1;
-      }  
+        if (d.isInside() && sw==0){
+        n = d.getResultado();
+        jugar(n);
+        sw = 1;
+        }  
     }
     if (c%60==0){
     sw = 0;

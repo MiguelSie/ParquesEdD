@@ -6,28 +6,31 @@ class inicio {
   
   public inicio(){
     b = new boton("LISTO", 30, width/2, 500, 400, 50);
-    txtBoxAzul = new textBox(width/2, 200, 200, 50);
-    txtBoxVerde = new textBox(width/2, 270, 200, 50);
-    txtBoxRojo = new textBox(width/2, 340, 200, 50);
+    txtBoxAzul = new textBox(700, 200, 200, 50);
+    txtBoxVerde = new textBox(700, 270, 200, 50);
+    txtBoxRojo = new textBox(700, 340, 200, 50);
   }
   
   public void mostrar(){
-  background(255);
+  background(fondo);
   textAlign(CENTER);
-  fill(200);
-  textSize(48);
+  fill(0);
+  textSize(64);
   text("PARQUÉS", width/2, height/6); 
   b.display();
   fill(0);
-  text("Ficha", 320, 195);
-  text("Ficha", 320, 265);
-  text("Ficha", 320, 335);
+  strokeWeight(8);
+  textSize(48);
+  text("Ficha", 350, 195);
+  text("Ficha", 350, 265);
+  text("Ficha", 350, 335);
   fill(0, 0, 100);
-  text("Azul", 400, 195);
+  text("Azul", 480, 195);
   fill (0,100,0);
-  text ("Verde", 410, 265);
+  text ("Verde", 490, 265);
   fill (100,0,0);
-  text ("Rojo", 400, 335);
+  text ("Rojo", 480, 335);
+  strokeWeight(5);
   txtBoxAzul.mostrar();
   txtBoxVerde.mostrar();
   txtBoxRojo.mostrar();

@@ -4,7 +4,7 @@ class Dado {
   private int x, y, w, h;
   
   public Dado() {
-    this.x= 80;
+    this.x= 120;
     this.y= 400;
     this.w = 80;
     this.h = 80;
@@ -72,6 +72,7 @@ class Dado {
           noFill();
           break;
     }
+    stroke(0);
   }
   
   public boolean isInside() {

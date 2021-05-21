@@ -1,10 +1,13 @@
 //Se carga todo el parqués
 public int pantalla;
+public PImage fondo;
 private inicio I;
 private Juego j;
 
 public void setup(){
-  size (1200, 600);
+  fondo = loadImage("/Accesorios/Imagenes/Madera.jpg");
+  fondo.resize(1200,650);
+  size (1200, 650);
   pantalla=0;
   I = new inicio();
   j = new Juego();
