@@ -234,9 +234,40 @@ public void jugar(int n){
     } else if (n!= 6 && primeraA == true){
       fichaJugar = 2;
     } else if (primeraA == false) {
-        j.FA.setXY(j.FA.getX()+40*n, j.FA.getY());
-        actualizarPos(n, casillaAzul, 1);
-        fichaJugar = 2;
+      /*
+        if (contA < 8 || (contA >= 40 && contA < 48)){
+            if (contA+n <= 8){
+              j.FA.setXY(j.FA.getX()-8*n, j.FA.getY()+25*n);
+              actualizarPos(n, casillaAzul, 1);
+            } else {
+              n = contA+n-8;
+              int aux = 8-contA;
+              j.FA.setXY(j.FA.getX()-8*aux, j.FA.getY()+25*aux);
+              actualizarPos(aux, casillaAzul, 1);
+            }
+          } if (contA >= 8 && contA < 24){
+            if (contA+n<=24){
+            j.FA.setXY(j.FA.getX()-8*n, j.FA.getY()-25*n);
+            actualizarPos(n, casillaAzul, 1);
+            } else {
+              n = contA+n-24;
+              int aux = 24-contA;
+              j.FA.setXY(j.FA.getX()-8*aux, j.FA.getY()-25*aux);
+              actualizarPos(aux, casillaAzul, 1);
+            }
+          } if (contA >= 24 && contA < 40){
+            if (contA+n<=40){
+            j.FA.setXY(j.FA.getX()+35*n, j.FA.getY());
+            actualizarPos(n, casillaAzul, 1);
+            }else {
+              n = contA+n-40;
+              int aux = 40-contA;
+              j.FA.setXY(j.FA.getX()+35*aux, j.FA.getY());
+              actualizarPos(aux, casillaAzul, 1);
+            }
+          }
+          */
+          fichaJugar = 2;
       }
     } else if (fichaJugar == 2){
         if(n == 6 && primeraV == true){
@@ -247,9 +278,40 @@ public void jugar(int n){
         }else if (n!= 6 && primeraV == true) {
           fichaJugar = 3;
         }else if (primeraV == false){
-            j.FV.setXY(j.FV.getX()+40*n, j.FV.getY());
+          /*
+          if (contV < 8 || (contV >= 40 && contV < 48)){
+            if (contV+n <= 8){
+              j.FV.setXY(j.FV.getX()-8*n, j.FV.getY()-25*n);
+              actualizarPos(n, casillaVerde, 2);
+            } else {
+              n = contV+n-8;
+              int aux = 8-contV;
+              j.FV.setXY(j.FV.getX()-8*aux, j.FV.getY()-25*aux);
+              actualizarPos(aux, casillaVerde, 2);
+            }
+          } if (contV >= 8 && contV < 24){
+            if (contV+n<=24){
+            j.FV.setXY(j.FV.getX()+35*n, j.FV.getY());
             actualizarPos(n, casillaVerde, 2);
-            fichaJugar = 3;
+            } else {
+              n = contV+n-24;
+              int aux = 24-contV;
+              j.FV.setXY(j.FV.getX()+35*aux, j.FV.getY());
+              actualizarPos(aux, casillaVerde, 2);
+            }
+          } if (contV >= 24 && contV < 40){
+            if (contV+n<=40){
+            j.FV.setXY(j.FV.getX()-8*n, j.FV.getY()-25*n);
+            actualizarPos(n, casillaVerde, 2);
+            }else {
+              n = contV+n-40;
+              int aux = 40-contV;
+              j.FV.setXY(j.FV.getX()-8*aux, j.FV.getY()+25*aux);
+              actualizarPos(aux, casillaVerde, 2);
+            }
+          }
+          */
+          fichaJugar = 3;
           }
     } else if (fichaJugar == 3){
         if(n == 6 && primeraR == true){
@@ -260,20 +322,44 @@ public void jugar(int n){
         }else if(n!=6 && primeraR==true) {
             fichaJugar = 1;
         }else if (primeraR == false) {
+          //El movimiento lo comencé aquí, puede ser que el movimiento de las otras 2 fichas esté bug, eso se puede arreglar pero esta es la base (trata de contar también las casillas que se mueven a ver si conté mal o algo)
           if (contR < 8 || (contR >= 40 && contR < 48)){
-            j.FR.setXY(j.FR.getX()+35*n, j.FR.getY());
-            contR+=n;
-            System.out.println(contR);             
+            if (contR+n <= 8){ //Esta es la condición que verifica si pasa o no una esquina 
+              j.FR.setXY(j.FR.getX()+35*n, j.FR.getY());
+              actualizarPos(n, casillaRoja, 3);
+              System.out.println(contR);
+            } else {
+              n = contR+n-8;
+              int aux = 8-contR;
+              j.FR.setXY(j.FR.getX()+35*aux, j.FR.getY());  //Este es el movimiento horizontal 
+              actualizarPos(aux, casillaRoja, 3);
+              System.out.println(contR);
+            }
           } if (contR >= 8 && contR < 24){
-            j.FR.setXY(j.FR.getX()-10*n, j.FR.getY()-10*n);
-            contR+=n;
+            if (contR+n<=24){
+            j.FR.setXY(j.FR.getX()-8*n, j.FR.getY()+25*n);
+            actualizarPos(n, casillaRoja, 3);
             System.out.println(contR);
+            } else {
+              n = contR+n-24;
+              int aux = 24-contR;
+              j.FR.setXY(j.FR.getX()-8*aux, j.FR.getY()+25*aux);
+              actualizarPos(aux, casillaRoja, 3);
+              System.out.println(contR);
+            }
           } if (contR >= 24 && contR < 40){
-            j.FR.setXY(j.FR.getX()-10*n, j.FR.getY()+10*n);
-            contR+=n;
+            if (contR+n<=40){
+            j.FR.setXY(j.FR.getX()-8*n, j.FR.getY()-25*n);
+            actualizarPos(n, casillaRoja, 3);
             System.out.println(contR);
+            }else {
+              n = contR+n-40;
+              int aux = 40-contR;
+              j.FR.setXY(j.FR.getX()-8*aux, j.FR.getY()-25*aux);
+              actualizarPos(aux, casillaRoja, 3);
+              System.out.println(contR);
+            }
           }
-          actualizarPos(n, casillaRoja, 3);
           fichaJugar = 1;
           }
     }
