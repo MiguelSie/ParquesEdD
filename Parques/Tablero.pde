@@ -231,8 +231,10 @@ public void jugar(int n){
       actualizarPos(0,casillaAzul,1);
       primeraA = false;
       fichaJugar = 2;
-    } else {
-        j.FA.setXY(j.FA.getX()+10*n, j.FA.getY());
+    } else if (n!= 6 && primeraA == true){
+      fichaJugar = 2;
+    } else if (primeraA == false) {
+        j.FA.setXY(j.FA.getX()+40*n, j.FA.getY());
         actualizarPos(n, casillaAzul, 1);
         fichaJugar = 2;
       }
@@ -242,8 +244,10 @@ public void jugar(int n){
             actualizarPos(0,casillaVerde,2);
             primeraV = false;
             fichaJugar = 3;
-        } else {
-            j.FV.setXY(j.FV.getX()+10*n, j.FV.getY());
+        }else if (n!= 6 && primeraV == true) {
+          fichaJugar = 3;
+        }else if (primeraV == false){
+            j.FV.setXY(j.FV.getX()+40*n, j.FV.getY());
             actualizarPos(n, casillaVerde, 2);
             fichaJugar = 3;
           }
@@ -253,10 +257,24 @@ public void jugar(int n){
             actualizarPos(0,casillaRoja,3);
             primeraR = false;
             fichaJugar = 1;
-        } else {
-            j.FR.setXY(j.FR.getX()+10*n, j.FR.getY());
-            actualizarPos(n, casillaRoja, 3);
+        }else if(n!=6 && primeraR==true) {
             fichaJugar = 1;
+        }else if (primeraR == false) {
+          if (contR < 8 || (contR >= 40 && contR < 48)){
+            j.FR.setXY(j.FR.getX()+35*n, j.FR.getY());
+            contR+=n;
+            System.out.println(contR);             
+          } if (contR >= 8 && contR < 24){
+            j.FR.setXY(j.FR.getX()-10*n, j.FR.getY()-10*n);
+            contR+=n;
+            System.out.println(contR);
+          } if (contR >= 24 && contR < 40){
+            j.FR.setXY(j.FR.getX()-10*n, j.FR.getY()+10*n);
+            contR+=n;
+            System.out.println(contR);
+          }
+          actualizarPos(n, casillaRoja, 3);
+          fichaJugar = 1;
           }
     }
 }

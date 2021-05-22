@@ -3,7 +3,7 @@
 class Ficha {
   private String nombre;
   private color Color;
-  private int x, y;
+  private float x, y;
   private int spawnX, spawnY;
   private boolean ganador = false;
   
@@ -32,16 +32,16 @@ class Ficha {
   //Función para que se mueva directo a la carcel, llamada desde el método de cárcel, el cual se llama al cumplirse la condición
   
   //Funcion para que se mueva en x o en y en funcion del número que haya salido en el dado, esta se llamaría desde juego
-  public void setXY(int x, int y){
+  public void setXY(float x, float y){
     this.x = x;
     this.y = y;
   }
   
-  public int getX (){
+  public float getX (){
     return x;
   }
   
-  public int getY(){
+  public float getY(){
     return y;
   }
   
