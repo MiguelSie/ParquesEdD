@@ -4,6 +4,7 @@ public PImage fondo;
 private inicio I;
 private Juego j;
 
+//Se carga la imagen de fondo, el tamaño del proyecto y el objeto Pantalla de inicio y el Objeto Juego.
 public void setup(){
   fondo = loadImage("/Accesorios/Imagenes/Madera.jpg");
   fondo.resize(1200,650);
@@ -13,6 +14,7 @@ public void setup(){
   j = new Juego();
 }
 
+//Se dibuja la pantalla dependiendo del caso.
 public void draw(){
   switch (pantalla){
   case 0:
