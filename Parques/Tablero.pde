@@ -101,8 +101,11 @@ public void mostrar(){
   stroke(0);
   strokeWeight(8);
   
+  circle(860,80,3);
+  
   acciones();
   c++;
+  verificarGanador();
 }
 
 void poligono(float x, float y, float radius, int npoints) {
@@ -206,7 +209,7 @@ public void actualizarPos(int n, Casilla p, int t){
       c++;
       contV++;
     }
-    if(contR == 48){
+    if(contV == 48){
       j.FV.setGanador();
     }
     p.fichaVON = true;
@@ -226,6 +229,15 @@ public void actualizarPos(int n, Casilla p, int t){
 
 public void jugar(int n){
   if (fichaJugar == 1){
+    movimientosAzul(n);
+    } else if (fichaJugar == 2){
+        movimientosVerde(n);
+    } else if (fichaJugar == 3){
+        movimientosRojo(n);
+    }
+}
+
+public void movimientosAzul(int n){
     if(n == 6 && primeraA == true){
       j.FA.setXY(725,340);
       actualizarPos(0,casillaAzul,1);
@@ -269,8 +281,10 @@ public void jugar(int n){
           */
           fichaJugar = 2;
       }
-    } else if (fichaJugar == 2){
-        if(n == 6 && primeraV == true){
+}
+
+public void movimientosVerde(int n){
+    if(n == 6 && primeraV == true){
             j.FV.setXY(420,340);
             actualizarPos(0,casillaVerde,2);
             primeraV = false;
@@ -313,8 +327,10 @@ public void jugar(int n){
           */
           fichaJugar = 3;
           }
-    } else if (fichaJugar == 3){
-        if(n == 6 && primeraR == true){
+}
+
+public void movimientosRojo(int n){
+    if(n == 6 && primeraR == true){
             j.FR.setXY(570,70);
             actualizarPos(0,casillaRoja,3);
             primeraR = false;
@@ -327,42 +343,53 @@ public void jugar(int n){
             if (contR+n <= 8){ //Esta es la condición que verifica si pasa o no una esquina 
               j.FR.setXY(j.FR.getX()+35*n, j.FR.getY());
               actualizarPos(n, casillaRoja, 3);
+              System.out.println("x: "+j.FR.getX());
+              System.out.println("y: "+j.FR.getY());
               System.out.println(contR);
             } else {
               n = contR+n-8;
               int aux = 8-contR;
               j.FR.setXY(j.FR.getX()+35*aux, j.FR.getY());  //Este es el movimiento horizontal 
               actualizarPos(aux, casillaRoja, 3);
+              System.out.println("x: "+j.FR.getX());
+              System.out.println("y: "+j.FR.getY());
               System.out.println(contR);
             }
           } if (contR >= 8 && contR < 24){
             if (contR+n<=24){
-            j.FR.setXY(j.FR.getX()-8*n, j.FR.getY()+25*n);
+            j.FR.setXY(j.FR.getX()-(15*n), j.FR.getY()+(30*n));
             actualizarPos(n, casillaRoja, 3);
+            System.out.println("x: "+j.FR.getX());
+            System.out.println("y: "+j.FR.getY());
             System.out.println(contR);
             } else {
               n = contR+n-24;
               int aux = 24-contR;
-              j.FR.setXY(j.FR.getX()-8*aux, j.FR.getY()+25*aux);
+              j.FR.setXY(j.FR.getX()-(15*aux), j.FR.getY()+(30*aux));
               actualizarPos(aux, casillaRoja, 3);
+              System.out.println("x: "+j.FR.getX());
+              System.out.println("y: "+j.FR.getY());
               System.out.println(contR);
             }
           } if (contR >= 24 && contR < 40){
             if (contR+n<=40){
-            j.FR.setXY(j.FR.getX()-8*n, j.FR.getY()-25*n);
+            j.FR.setXY(j.FR.getX()-(15*n), j.FR.getY()-(35*n));
             actualizarPos(n, casillaRoja, 3);
+            System.out.println("x: "+j.FR.getX());
+            System.out.println("y: "+j.FR.getY());
             System.out.println(contR);
             }else {
               n = contR+n-40;
               int aux = 40-contR;
-              j.FR.setXY(j.FR.getX()-8*aux, j.FR.getY()-25*aux);
+              j.FR.setXY(j.FR.getX()-(15*aux), j.FR.getY()+-(35*aux));
               actualizarPos(aux, casillaRoja, 3);
+              System.out.println("x: "+j.FR.getX());
+              System.out.println("y: "+j.FR.getY());
               System.out.println(contR);
             }
           }
           fichaJugar = 1;
           }
-    }
 }
 
 public void acciones(){
@@ -376,6 +403,41 @@ public void acciones(){
     if (c%60==0){
     sw = 0;
     c = 0;
+  }
+}
+
+public void verificarGanador(){
+  if(j.FA.getGanador() == true) {
+     stroke(0);
+     strokeWeight(8);
+     fill(255);
+     rect(width/2,height/2, 350, 100, 20);
+     noFill();
+     fill(0);
+     text("Ha ganado el Jugador Azul!", width/2, height/2);
+     noFill();
+  } else {
+    if(j.FV.getGanador() == true) {
+      stroke(0);
+      strokeWeight(8);
+      fill(255);
+      rect(width/2,height/2, 350, 100, 20);
+      noFill();
+      fill(0);
+      text("Ha ganado el Jugador Verde!", width/2, height/2);
+      noFill();
+    } else {
+      if(j.FR.getGanador() == true) {
+        stroke(0);
+        strokeWeight(8);
+        fill(255);
+        rect(width/2,height/2, 350, 100, 20);
+        noFill();
+        fill(0);
+        text("Ha ganado el Jugador Rojo!", width/2, height/2);
+        noFill();
+      }
+    }
   }
 }
 
